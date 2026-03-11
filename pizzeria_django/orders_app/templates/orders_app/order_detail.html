@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Zamówienie #{{ order.id }}{% endblock %}
+
+{% block content %}
+<h1>Szczegóły zamówienia #{{ order.id }}</h1>
+
+<p><strong>Klient:</strong> {{ order.customer.name }}</p>
+<p><strong>Data:</strong> {{ order.created_at }}</p>
+
+<h3>Pozycje zamówienia</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Pizza</th>
+            <th>Ilość</th>
+            <th>Cena jednostkowa</th>
+            <th>Suma</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in order.items.all %}
+        <tr>
+            <td>{{ item.pizza.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.unit_price|floatformat:2 }} zł</td>
+            <td>{{ item.total_price|floatformat:2 }} zł</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Podsumowanie</h3>
+<p>Suma częściowa: {{ order.subtotal|floatformat:2 }} zł</p>
+{% if order.customer.is_vip %}
+<p>Rabat ({{ order.customer.discount_percent }}%): -{{ order.discount_amount|floatformat:2 }} zł</p>
+{% endif %}
+<p><strong>Do zapłaty: {{ order.total_price|floatformat:2 }} zł</strong></p>
+
+<hr>
+
+<form method="post" action="{% url 'order_delete' order.id %}" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" style="background-color: #dc3545; color: white;">Anuluj zamówienie</button>
+</form>
+
+<a href="{% url 'order_list' %}">Powrót do listy zamówień</a>
+{% endblock %}

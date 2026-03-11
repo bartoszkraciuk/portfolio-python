@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Dodaj pizze{% endblock %}
+
+{% block content %}
+<h1>Dodaj nowa pizze</h1>
+
+{% if errors %}
+<div style="color: red;">
+    {% for error in errors %}
+    <p>{{ error }}</p>
+    {% endfor %}
+</div>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    <div>
+        <label>Nazwa:</label>
+        <input type="text" name="name" value="{{ name }}" required>
+    </div>
+    <div>
+        <label>Cena (zl):</label>
+        <input type="number" name="price" step="0.01" value="{{ price }}" required>
+    </div>
+    <button type="submit">Dodaj</button>
+</form>
+
+<a href="/menu/">Powrot do menu</a>
+{% endblock %}

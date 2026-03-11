@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "customer_id": 5,
+    "items": [
+      {
+        "pizza_name": "Test",
+        "pizza_price": 100.0,
+        "quantity": 1
+      }
+    ],
+    "discount_percent": null
+  },
+  {
+    "id": 2,
+    "customer_id": 4,
+    "items": [
+      {
+        "pizza_name": "Margherita",
+        "pizza_price": 25.0,
+        "quantity": 1
+      }
+    ],
+    "discount_percent": null
+  },
+  {
+    "id": 3,
+    "customer_id": 2,
+    "items": [
+      {
+        "pizza_name": "Hawajska",
+        "pizza_price": 32.0,
+        "quantity": 1
+      }
+    ],
+    "discount_percent": 15
+  }
+]

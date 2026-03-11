@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Margherita",
+    "price": 25.0
+  },
+  {
+    "name": "Pepperoni",
+    "price": 30.0
+  },
+  {
+    "name": "Hawajska",
+    "price": 32.0
+  },
+  {
+    "name": "Quattro Formaggi",
+    "price": 35.0
+  },
+  {
+    "name": "Farmerska",
+    "price": 30.0
+  },
+  {
+    "name": "Test",
+    "price": 100.0
+  }
+]

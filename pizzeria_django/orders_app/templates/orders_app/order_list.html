@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Zamówienia{% endblock %}
+
+{% block content %}
+<h1>Lista zamówień</h1>
+<a href="{% url 'order_create' %}">Utwórz nowe zamówienie</a>
+
+<style>
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { padding: 15px; text-align: left; border-bottom: 1px solid #ddd; }
+    th { background-color: #f8f9fa; }
+</style>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Klient</th>
+            <th>Status VIP</th>
+            <th>Pozycje</th>
+            <th>Suma (przed rabatem)</th>
+            <th>Rabat</th>
+            <th>Suma (po rabacie)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td><a href="{% url 'order_detail' order.id %}">#{{ order.id }}</a></td>
+            <td>{{ order.customer.name }}</td>
+            <td>{% if order.customer.is_vip %}Tak ({{ order.customer.discount_percent }}% rabatu){% else %}Nie{% endif %}</td>
+            <td>{{ order.items.count }}</td>
+            <td>{{ order.subtotal|floatformat:2 }} zł</td>
+            <td>{{ order.discount_amount|floatformat:2 }} zł</td>
+            <td>{{ order.total_price|floatformat:2 }} zł</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">Brak zamówień.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

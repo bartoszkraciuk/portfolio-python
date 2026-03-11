@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Dodaj klienta{% endblock %}
+
+{% block content %}
+<h1>Dodaj klienta</h1>
+
+{% if errors %}
+<div style="color: red;">
+    {% for error in errors %}
+    <p>{{ error }}</p>
+    {% endfor %}
+</div>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    <div>
+        <label>Imie:</label>
+        <input type="text" name="name" value="{{ name }}" required>
+    </div>
+    <div>
+        <label>Telefon:</label>
+        <input type="text" name="phone" value="{{ phone }}" required>
+    </div>
+    <div>
+        <label>Typ:</label>
+        <select name="type">
+            <option value="regular">Zwykly klient</option>
+            <option value="vip">VIP</option>
+        </select>
+    </div>
+    <div>
+        <label>Rabat VIP (%):</label>
+        <input type="number" name="discount" value="10" min="1" max="50">
+        <small>(tylko dla VIP)</small>
+    </div>
+    <button type="submit">Dodaj</button>
+</form>
+
+<a href="/klienci/">Powrot do listy</a>
+{% endblock %}

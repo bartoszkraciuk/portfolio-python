@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Szczegóły klienta{% endblock %}
+
+{% block content %}
+<h1>Szczegóły klienta</h1>
+
+<p><strong>Imię i nazwisko:</strong> {{ customer.name }}</p>
+<p><strong>Telefon:</strong> {{ customer.phone }}</p>
+
+{% if customer.is_vip %}
+    <div style="background-color: #f9f9d9; padding: 10px; border: 1px solid #e0e0b0;">
+        <h3>Status VIP</h3>
+        <p><strong>Rabat:</strong> {{ customer.discount_percent }}%</p>
+        <p><strong>Punkty lojalnościowe:</strong> {{ customer.loyalty_points }}</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <label>Dodaj punkty: <input type="number" name="points" min="1" value="10"></label>
+            <button type="submit">Zapisz</button>
+        </form>
+    </div>
+{% endif %}
+
+<p><a href="{% url 'customer_list' %}">Powrót do listy klientów</a></p>
+{% endblock %}

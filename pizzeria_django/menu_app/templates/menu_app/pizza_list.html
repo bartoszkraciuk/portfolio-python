@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Menu{% endblock %}
+
+{% block content %}
+<h1>Menu Pizzerii</h1>
+
+<p>
+    Sortuj:
+    <a href="?sort=name">Po nazwie</a> |
+    <a href="?sort=price_asc">Cena (rosnaco)</a> |
+    <a href="?sort=price_desc">Cena (malejaco)</a>
+</p>
+
+<div style="margin-bottom: 20px;">
+    <a href="/menu/dodaj/" style="display: inline-block; padding: 10px 20px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px;">+ Dodaj nową pizzę</a>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(500px, 1fr)); gap: 20px;">
+    {% for pizza in pizzas %}
+    <div style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); background-color: #fff; text-align: center; transition: transform 0.2s;">
+        <h2 style="margin-top: 0; font-size: 1.5em;"><a href="/menu/{{ pizza.name }}/" style="text-decoration: none; color: #333;">{{ pizza.name }}</a></h2>
+        <p style="font-size: 1.2em; font-weight: bold; color: #555;">{{ pizza.price }} zł</p>
+        
+        <form method="post" action="/menu/usuń/" style="margin-top: 15px;">
+            {% csrf_token %}
+            <input type="hidden" name="name" value="{{ pizza.name }}">
+            <button type="submit" style="background-color: #eb7883; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">Usuń</button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+
+<hr>
+<h3>Statystyki menu:</h3>
+{% if cheapest %}
+    <p>Najtansza pizza: <strong>{{ cheapest.name }}</strong> ({{ cheapest.price }} zl)</p>
+{% endif %}
+{% if most_expensive %}
+    <p>Najdrozsza pizza: <strong>{{ most_expensive.name }}</strong> ({{ most_expensive.price }} zl)</p>
+{% endif %}
+{% if avg_price %}
+    <p>Srednia cena: <strong>{{ avg_price|floatformat:2 }} zl</strong></p>
+{% endif %}
+{% endblock %}

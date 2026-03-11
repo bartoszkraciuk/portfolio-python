@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Nowe zamówienie{% endblock %}
+
+{% block content %}
+<h1>Utwórz nowe zamówienie</h1>
+
+{% if errors %}
+<div style="color: red;">
+    {% for error in errors %}
+    <p>{{ error }}</p>
+    {% endfor %}
+</div>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    <div>
+        <label for="customer_id">Klient:</label>
+        <select name="customer_id" id="customer_id" required>
+            <option value="">--- Wybierz klienta ---</option>
+            {% for customer in customers %}
+            <option value="{{ customer.id }}">{{ customer.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div>
+        <label for="pizza_id">Pizza:</label>
+        <select name="pizza_id" id="pizza_id" required>
+            <option value="">--- Wybierz pizzę ---</option>
+            {% for pizza in pizzas %}
+            <option value="{{ pizza.id }}">{{ pizza.name }} - {{ pizza.price }} zł</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div>
+        <label for="quantity">Ilość:</label>
+        <input type="number" name="quantity" id="quantity" value="1" min="1" required>
+    </div>
+    <button type="submit">Utwórz zamówienie</button>
+</form>
+
+<a href="{% url 'order_list' %}">Powrót do listy</a>
+{% endblock %}

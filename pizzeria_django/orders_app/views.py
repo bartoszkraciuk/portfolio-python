@@ -52,7 +52,6 @@ def order_create(request):
                 except (Pizza.DoesNotExist, ValueError):
                     errors.append("Wybrano nieprawidłową pizzę lub podano złą ilość.")
 
-        # Pozbywamy się ewentualnych zduplikowanych komunikatów o błędach
         errors = list(dict.fromkeys(errors))
 
         if not errors and valid_items:

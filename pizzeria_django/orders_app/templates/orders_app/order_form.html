@@ -3,7 +3,7 @@
 {% block title %}Nowe zamówienie{% endblock %}
 
 {% block content %}
-<h1>Utwórz nowe zamówienie</h1>
+<h1 style="margin-bottom: 30px;">Utwórz nowe zamówienie</h1>
 
 {% if errors %}
 <div style="color: red;">
@@ -15,7 +15,7 @@
 
 <form method="post">
     {% csrf_token %}
-    <div>
+    <div style="margin-bottom: 20px;">
         <label for="customer_id">Klient:</label>
         <select name="customer_id" id="customer_id" required>
             <option value="">--- Wybierz klienta ---</option>
@@ -27,7 +27,7 @@
     
     <h3>Pozycje zamówienia</h3>
     <div id="items-container">
-        <div class="order-item" style="margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+        <div class="order-item" style="margin-bottom: 20px; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
             <label>Pizza:</label>
             <select name="pizza_id" required>
                 <option value="">--- Wybierz pizzę ---</option>

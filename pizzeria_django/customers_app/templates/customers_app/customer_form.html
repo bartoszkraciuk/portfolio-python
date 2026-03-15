@@ -3,7 +3,7 @@
 {% block title %}Dodaj klienta{% endblock %}
 
 {% block content %}
-<h1>Dodaj klienta</h1>
+<h1 style="margin-bottom: 30px;">Dodaj klienta</h1>
 
 {% if errors %}
 <div style="color: red;">
@@ -15,22 +15,22 @@
 
 <form method="post">
     {% csrf_token %}
-    <div>
+    <div style="margin-bottom: 20px;">
         <label>Imie:</label>
         <input type="text" name="name" value="{{ name }}" required>
     </div>
-    <div>
+    <div style="margin-bottom: 20px;">
         <label>Telefon:</label>
         <input type="text" name="phone" value="{{ phone }}" required>
     </div>
-    <div>
+    <div style="margin-bottom: 20px;">
         <label>Typ:</label>
         <select name="type">
             <option value="regular">Zwykly klient</option>
             <option value="vip">VIP</option>
         </select>
     </div>
-    <div>
+    <div style="margin-bottom: 20px;">
         <label>Rabat VIP (%):</label>
         <input type="number" name="discount" value="10" min="1" max="50">
         <small>(tylko dla VIP)</small>

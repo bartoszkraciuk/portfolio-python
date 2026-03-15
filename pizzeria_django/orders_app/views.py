@@ -17,39 +17,53 @@ def order_detail(request, order_id):
 def order_create(request):
     if request.method == 'POST':
         customer_id_str = request.POST.get('customer_id', '')
-        pizza_id_str = request.POST.get('pizza_id', '')
-        quantity_str = request.POST.get('quantity', '1')
+        pizza_ids = request.POST.getlist('pizza_id')
+        quantities = request.POST.getlist('quantity')
 
         errors = []
-        customer, pizza, quantity = None, None, None
+        customer = None
+        valid_items = []
 
         try:
             if not customer_id_str:
                 errors.append("Wybierz klienta.")
             else:
                 customer = Customer.objects.get(pk=int(customer_id_str))
+        except (Customer.DoesNotExist, ValueError):
+            errors.append("Nieprawidłowy klient.")
 
-            if not pizza_id_str:
-                errors.append("Wybierz pizze.")
-            else:
-                pizza = Pizza.objects.get(pk=int(pizza_id_str))
+        if not pizza_ids or not quantities:
+            errors.append("Zamówienie musi zawierać przynajmniej jedną pozycję.")
+        elif len(pizza_ids) != len(quantities):
+            errors.append("Niezgodna liczba wybranych pizz i ilości.")
+        else:
+            for p_id_str, q_str in zip(pizza_ids, quantities):
+                try:
+                    if not p_id_str:
+                        errors.append("Wybierz pizzę dla każdej pozycji.")
+                        continue
+                    
+                    pizza = Pizza.objects.get(pk=int(p_id_str))
+                    quantity = int(q_str)
+                    if quantity <= 0:
+                        errors.append(f"Ilość dla {pizza.name} musi być dodatnia.")
+                    else:
+                        valid_items.append((pizza, quantity))
+                except (Pizza.DoesNotExist, ValueError):
+                    errors.append("Wybrano nieprawidłową pizzę lub podano złą ilość.")
 
-            if not quantity_str or int(quantity_str) <= 0:
-                errors.append("Ilość musi być dodatnia.")
-            else:
-                quantity = int(quantity_str)
+        # Pozbywamy się ewentualnych zduplikowanych komunikatów o błędach
+        errors = list(dict.fromkeys(errors))
 
-        except (Customer.DoesNotExist, Pizza.DoesNotExist, ValueError):
-            errors.append("Nieprawidłowe dane formularza.")
-
-        if not errors:
+        if not errors and valid_items:
             new_order = Order.objects.create(customer=customer)
-            OrderItem.objects.create(
-                order=new_order,
-                pizza=pizza,
-                quantity=quantity,
-                unit_price=pizza.price
-            )
+            for pizza, quantity in valid_items:
+                OrderItem.objects.create(
+                    order=new_order,
+                    pizza=pizza,
+                    quantity=quantity,
+                    unit_price=pizza.price
+                )
             messages.success(request, f"Dodano nowe zamówienie: #{new_order.id}")
             return redirect('order_detail', order_id=new_order.id)
 

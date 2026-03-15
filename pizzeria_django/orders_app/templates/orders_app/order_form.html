@@ -24,21 +24,56 @@
             {% endfor %}
         </select>
     </div>
-    <div>
-        <label for="pizza_id">Pizza:</label>
-        <select name="pizza_id" id="pizza_id" required>
-            <option value="">--- Wybierz pizzę ---</option>
-            {% for pizza in pizzas %}
-            <option value="{{ pizza.id }}">{{ pizza.name }} - {{ pizza.price }} zł</option>
-            {% endfor %}
-        </select>
+    
+    <h3>Pozycje zamówienia</h3>
+    <div id="items-container">
+        <div class="order-item" style="margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+            <label>Pizza:</label>
+            <select name="pizza_id" required>
+                <option value="">--- Wybierz pizzę ---</option>
+                {% for pizza in pizzas %}
+                <option value="{{ pizza.id }}">{{ pizza.name }} - {{ pizza.price }} zł</option>
+                {% endfor %}
+            </select>
+            
+            <label>Ilość:</label>
+            <input type="number" name="quantity" value="1" min="1" required style="width: 60px;">
+            
+            <button type="button" onclick="removeItem(this)" style="color: #dc3545; background: none; border: none; cursor: pointer; margin-left: 10px;">❌ Usuń</button>
+        </div>
     </div>
-    <div>
-        <label for="quantity">Ilość:</label>
-        <input type="number" name="quantity" id="quantity" value="1" min="1" required>
-    </div>
+    <button type="button" id="add-item-btn" style="margin-bottom: 20px; padding: 5px 10px;">+ Dodaj kolejną pozycję</button>
+    <br>
+    
     <button type="submit">Utwórz zamówienie</button>
 </form>
 
 <a href="{% url 'order_list' %}">Powrót do listy</a>
+
+<script>
+    document.getElementById('add-item-btn').addEventListener('click', function() {
+        var container = document.getElementById('items-container');
+        var firstItem = container.querySelector('.order-item');
+        
+        // Klonujemy pierwszy element na liście
+        var newItem = firstItem.cloneNode(true);
+        
+        // Resetujemy wartości w sklonowanym wierszu
+        newItem.querySelector('select').value = '';
+        newItem.querySelector('input[type="number"]').value = '1';
+        
+        // Dodajemy nowy wiersz do formularza
+        container.appendChild(newItem);
+    });
+
+    function removeItem(button) {
+        var container = document.getElementById('items-container');
+        // Zabezpieczenie przed usunięciem jedynej pozycji w formularzu
+        if (container.querySelectorAll('.order-item').length > 1) {
+            button.parentElement.remove();
+        } else {
+            alert('Zamówienie musi zawierać przynajmniej jedną pozycję.');
+        }
+    }
+</script>
 {% endblock %}

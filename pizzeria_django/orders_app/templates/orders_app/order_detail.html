@@ -8,6 +8,12 @@
 <p><strong>Klient:</strong> {{ order.customer.name }}</p>
 <p><strong>Data:</strong> {{ order.created_at }}</p>
 
+<style>
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 20px; }
+    th, td { padding: 12px 5px; text-align: left; border-bottom: 1px solid #ddd; }
+    th { background-color: #f8f9fa; }
+</style>
+
 <h3>Pozycje zamówienia</h3>
 <table>
     <thead>

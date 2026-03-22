@@ -1,0 +1,275 @@
+/*Global*/
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #d1c39e;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif, sans-serif;
+}  
+
+.open_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background-color: #473b26;
+    color: #ffffff;
+}
+
+nav a {
+    margin: 0 15px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+nav a:hover {
+    color: #c99b70;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.actions a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.actions a:hover {
+    color: #c99b70;
+
+}
+
+.cart {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #489202;
+    padding: 8px 15px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: background 0.2s ease;
+}
+
+.cart:hover {
+    background-color: #8fa877;
+}
+
+.logo img {
+    width: 250px;
+    height: auto;
+}
+
+.pizza-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+.pizza-card {
+    background-color: #c4ad82;
+    border: 2px solid #5a431b;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;;
+
+    display: flex;
+    flex-direction: column;
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pizza-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.pizza-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.pizza-card h2 {
+    text-align: center;
+    margin: 10px 5px;
+    font-size: 24px;   
+    color: #351e00;
+}
+
+.pizza-card p {
+    margin-bottom: 5px;
+}
+
+.pizza-card p:last-of-type {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.pizza-card form {
+    margin-top: auto;
+    padding: 15px;
+}
+
+.pizza-card form input{
+    width: 60px;
+    padding: 5px;
+}
+
+.pizza-card form button {
+    padding: 8px 12px;
+    margin-left: 10px;
+
+    background-color: #489202;
+    color:#ffffff;
+    border: none;
+    border-radius: 8px;
+
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.pizza-card form button:hover {
+    background-color: #8fa877;
+}
+
+
+/*forms*/
+.form-container {
+    max-width: 400px;
+    margin: 60px auto;
+    background-color: #a18c67;
+    padding: 30px;
+    border-radius: 20px;
+    border: 2px solid #685a41;
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.register-form label {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.register-form input {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.register-form input{
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.register-form input:focus {
+    outline: none;
+    border: 1px solid #489202;
+}
+
+.register-form button {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #489202;
+    color: #ffffff;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.register-form button:hover {
+    background-color: #8fa877;
+}
+
+/*Responsive*/
+@media (max-width: 992px) {
+    .pizza-list{
+        margin: 20px 10px;
+        grid-template-columns: repeat(2,1fr);
+    }
+    .open_header{
+        padding: 40px 10px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .actions{
+        display: block;
+    }
+    .actions a{
+        display: block;
+        font-weight: bolder;
+        padding: 10px 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .open_header{
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 40px 20px;
+    }
+    .nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-top: 20px;
+    }
+    .pizza-list {
+        grid-template-columns: 1fr;
+        padding: 0 15px;
+    }
+
+    .form-container {
+        margin: 30px 15px;
+    }
+}
+
+@media (max-width: 374px) {
+    
+    header, main, footer {
+        display: none !important;
+    }   
+    
+    body::before {
+        display: flex;
+        max-width: 100%;
+        justify-content: center;
+        content: "Minimalna szerokość ekranu to 375px";
+        text-align: center;
+        padding: 150 10px;
+        font-size: 30px;
+   }
+}

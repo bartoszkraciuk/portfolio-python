@@ -1,0 +1,77 @@
+{% extends "menu/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="pizza-list">
+    
+    <article class="pizza-card">
+        <img src="{% static 'menu/img/Margherita.png' %}" alt="Pizza Margherita">
+        <h2>Margherita</h2>
+        <p>Składniki: sos pomidorowy, ser mozzarella</p>
+        <p>Cena: 25 zł</p>
+
+        <form>
+            <input type="number" value="1" min="1" max="10">
+            <button type="submit">Dodaj do koszyka</button>
+        </form>
+    </article>
+
+    <article class="pizza-card">
+        <img src="{% static 'menu/img/Capricciosa.png' %}" alt="Pizza Capricciosa">
+        <h2>Capricciosa</h2>
+        <p>Składniki: sos pomidorowy, ser mozzarella, szynka, pieczarki</p>
+        <p>Cena: 29 zł</p>
+        <form>
+            <input type="number" value="1" min="1" max="10">
+            <button type="submit">Dodaj do koszyka</button>
+        </form>
+    </article>
+
+    <article class="pizza-card">
+        <img src="{% static 'menu/img/Pepperoni.png' %}" alt="Pizza Pepperoni">
+        <h2>Pepperoni</h2>
+        <p>Składniki: sos pomidorowy, ser mozzarella, pepperoni, cebula</p>
+        <p>Cena: 30 zł</p>
+        <form>
+            <input type="number" value="1" min="1" max="10">
+            <button type="submit">Dodaj do koszyka</button>
+        </form>
+    </article>
+
+    <article class="pizza-card">
+        <img src="{% static 'menu/img/Quatro.png' %}" alt="Pizza Quattro Formaggi">
+        <h2>Quattro Formaggi</h2>
+        <p>Składniki: sos serowy, 4 sery: mozzarella, gorgonzola, parmezan, ricotta</p>
+        <p>Cena: 32 zł</p>
+        <form>
+            <input type="number" value="1" min="1" max="10">
+            <button type="submit">Dodaj do koszyka</button>
+        </form>
+    </article>
+
+    <article class="pizza-card">
+        <img src="{% static 'menu/img/Hawajska.png' %}" alt="Pizza Hawajska">
+        <h2>Hawajska</h2>
+        <p>Składniki: sos pomidorowy, ser mozzarella, szynka, ananas</p>
+        <p>Cena: 30 zł</p>
+        <form>
+            <input type="number" value="1" min="1" max="10">
+            <button type="submit">Dodaj do koszyka</button>
+        </form>
+    </article>
+
+    <article class="pizza-card">
+        <img src="{% static 'menu/img/Napoli.png' %}" alt="Pizza Napoli">
+        <h2>Napoli</h2>
+        <p>Składniki: sos pomidorowy, ser mozzarella, bazylia</p>
+        <p>Cena: 28 zł</p>
+        <form>
+            <input type="number" value="1" min="1" max="10">
+            <button type="submit">Dodaj do koszyka</button>
+        </form>
+    </article>
+
+</section>
+
+{% endblock %}

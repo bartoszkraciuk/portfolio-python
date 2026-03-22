@@ -1,0 +1,42 @@
+{% extends 'menu/base.html' %}
+{% load static %}
+
+{% block title %}Rejestracja{% endblock %}
+
+{% block content %}
+
+<div class="form-container">
+   
+    <h2>Zarejestruj się</h2>
+   
+    <form class="register-form">
+        <label for="first_name">Imię:</label>
+        <input type="text" placeholder="Wprowadź imię..." required>
+
+        <label for="last_name">Nazwisko:</label>
+        <input type="text" placeholder="Wprowadź nazwisko..." required>
+
+        <label for="phone_number">Numer telefonu:</label>
+        <input type="tel" placeholder="Wprowadź nr telefonu..." required>
+
+        <label for="city">Miejscowość:</label>
+        <input type="text" placeholder="Wprowadź miasto..." required>
+
+        <label for="post_code">Kod pocztowy:</label>
+        <input type="text" inputmode="numeric" placeholder="Wprowadź kod pocztowy..." pattern="[0-9]{2}-[0-9]{3}" required>      
+
+        <label for="adress">Adres:</label>
+        <input type="text" placeholder="Wprowadź adres..." required>
+
+        <label for="email">Email:</label>
+        <input type="email" placeholder="Podaj adres email..." required>
+
+        <label for="password">Hasło:</label>
+        <input type="password" placeholder="Podaj hasło..." required>
+
+        <button type="submit">Zarejestruj</button>
+
+    </form>
+</div>
+
+{% endblock %}
